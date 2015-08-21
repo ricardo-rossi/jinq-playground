@@ -17,46 +17,46 @@ import java.util.Map;
  */
 public class Main {
 
-    private static EntityManagerFactory entityManagerFactory;
-    private static JinqJPAStreamProvider streams;
-    private EntityManager em;
+   private static EntityManagerFactory entityManagerFactory;
+   private static JinqJPAStreamProvider streams;
+   private EntityManager em;
 
-    // Models
-    private JinqStream<Cities> cities() {
-        return streams.streamAll(em, Cities.class);
-    }
+   // Models
+   private JinqStream<Cities> cities() {
+      return streams.streamAll(em, Cities.class);
+   }
 
-    private JinqStream<Names> names() {
-        return streams.streamAll(em, Names.class);
-    }
+   private JinqStream<Names> names() {
+      return streams.streamAll(em, Names.class);
+   }
 
-    public static void main(String[] args) throws Exception {
+   public static void main(String[] args) throws Exception {
 
-        // Configure Jinq for the given JPA database connection
-        entityManagerFactory = Persistence.createEntityManagerFactory("MyDBModels");
-        streams = new JinqJPAStreamProvider(entityManagerFactory);
+      // Configure Jinq for the given JPA database connection
+      entityManagerFactory = Persistence.createEntityManagerFactory("MyDBModels");
+      streams = new JinqJPAStreamProvider(entityManagerFactory);
 
-        // Configure Jinq to output the queries it executes
-        streams.setHint("queryLogger", (JPAQueryLogger) (query, positionParameters, namedParameters) -> {
-            System.out.println("  " + query);
-        });
+      // Configure Jinq to output the queries it executes
+      streams.setHint("queryLogger", (JPAQueryLogger) (query, positionParameters, namedParameters) -> {
+         System.out.println("  " + query);
+      });
 
-        // Start running some queries
-        new Main().runSampleQueries();
+      // Start running some queries
+      new Main().runSampleQueries();
 
-    }
+   }
 
-    private void runSampleQueries() {
+   private void runSampleQueries() {
 
-        PrintStream out = System.out;
-        em = entityManagerFactory.createEntityManager();
+      PrintStream out = System.out;
+      em = entityManagerFactory.createEntityManager();
 
-        out.println("LIST OF CITIES");
-        cities().forEach(c -> out.println(c.getName()));
-        out.println();
+      out.println("LIST OF CITIES");
+      cities().forEach(c -> out.println(c.getName()));
+      out.println();
 
-        out.println("LIST OF NAMES");
-        names().forEach(n -> out.println(n.getFirstName() + " " + n.getLastName()));
-        out.println();
-    }
+      out.println("LIST OF NAMES");
+      names().forEach(n -> out.println(n.getFirstName() + " " + n.getLastName()));
+      out.println();
+   }
 }

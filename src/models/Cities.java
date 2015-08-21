@@ -5,51 +5,48 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/**
- * Created by rrossi on 8/20/15.
- */
 @Entity
 public class Cities {
-    private int id;
-    private String name;
+   private int id;
+   private String name;
 
-    @Id
-    @Column(name = "ID")
-    public int getId() {
-        return id;
-    }
+   @Id
+   @Column(name = "ID")
+   public int getId() {
+      return id;
+   }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+   public void setId(int id) {
+      this.id = id;
+   }
 
-    @Basic
-    @Column(name = "NAME")
-    public String getName() {
-        return name;
-    }
+   @Basic
+   @Column(name = "NAME")
+   public String getName() {
+      return name;
+   }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+   public void setName(String name) {
+      this.name = name;
+   }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
 
-        Cities cities = (Cities) o;
+      Cities cities = (Cities) o;
 
-        if (id != cities.id) return false;
-        if (name != null ? !name.equals(cities.name) : cities.name != null) return false;
+      if (id != cities.id) return false;
+      if (name != null ? !name.equals(cities.name) : cities.name != null) return false;
 
-        return true;
-    }
+      return true;
+   }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
-    }
+   @Override
+   public int hashCode() {
+      int result = id;
+      result = 31 * result + (name != null ? name.hashCode() : 0);
+      return result;
+   }
 }
