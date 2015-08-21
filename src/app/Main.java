@@ -37,12 +37,8 @@ public class Main {
         streams = new JinqJPAStreamProvider(entityManagerFactory);
 
         // Configure Jinq to output the queries it executes
-        streams.setHint("queryLogger", new JPAQueryLogger() {
-            @Override
-            public void logQuery(String query, Map<Integer, Object> positionParameters,
-                                 Map<String, Object> namedParameters) {
-                System.out.println("  " + query);
-            }
+        streams.setHint("queryLogger", (JPAQueryLogger) (query, positionParameters, namedParameters) -> {
+            System.out.println("  " + query);
         });
 
         // Start running some queries
