@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.PrintStream;
-import java.util.Map;
 
 /**
  * JINQ test
@@ -37,9 +36,8 @@ public class Main {
       streams = new JinqJPAStreamProvider(entityManagerFactory);
 
       // Configure Jinq to output the queries it executes
-      streams.setHint("queryLogger", (JPAQueryLogger) (query, positionParameters, namedParameters) -> {
-         System.out.println("  " + query);
-      });
+      streams.setHint("queryLogger", (JPAQueryLogger) (query, positionParameters, namedParameters) ->
+         System.out.println("  " + query));
 
       // Start running some queries
       new Main().runSampleQueries();
