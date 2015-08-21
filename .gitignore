@@ -4,4 +4,4 @@ out
 target
 *.log
 *.iml
-
+data/*.lck
